@@ -1,5 +1,8 @@
-<script setup lang="ts">
-import Tarjeta, { Character } from './components/Tarjeta/Tarjeta.vue';
+import { describe, it, expect } from 'vitest'
+
+import { mount } from '@vue/test-utils'
+import Tarjeta, { Character } from '../Tarjeta/Tarjeta.vue'
+import Favorite from '../Favorite/Favorite.vue';
 
 const character: Character = {
   "id": 1,
@@ -23,11 +26,18 @@ const character: Character = {
   ],
   "url": "https://rickandmortyapi.com/api/character/1",
   "created": "2017-11-04T18:48:46.250Z"
-}
-</script>
+};
 
-<template>
-  <main>
-    <Tarjeta :character="character" />
-  </main>
-</template>
+describe('Tarjeta', () => {
+  const wrapper = mount(Tarjeta, { props: { character }, global: { components: { Favorite } } })
+
+  it('renders properly', () => {
+    expect(wrapper.props().character).toBeTruthy()
+  })
+
+  it('emit toggle event', async () => {
+    wrapper.getComponent(Favorite).vm.$emit('toggleFavorite')
+
+    expect(wrapper.emitted('toggleFavorite')).toBeTruthy()
+  })
+})

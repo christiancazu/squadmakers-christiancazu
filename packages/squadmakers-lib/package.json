@@ -1,6 +1,6 @@
 {
-  "name": "@christiancazu/squadmakers-lib",
-  "version": "0.0.1",
+  "name": "christiancazu-squadmakers-lib",
+  "version": "0.0.0",
   "private": false,
   "author": "Christian Carrillo",
   "type": "module",
@@ -31,6 +31,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
     "rollup-plugin-typescript2": "^0.36.0"
   },
   "license": "MIT",
@@ -41,5 +45,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/christiancazu/squadmakers-christiancazu.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

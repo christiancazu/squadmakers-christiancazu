@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Squadmakers Frontend Challenge",
   "scripts": {
-    "lib": "pnpm --filter squadmakers-lib"
+    "lib": "pnpm --filter christiancazu-squadmakers-lib"
   },
   "dependencies": {
     "vue": "^3.4.29"
@@ -28,5 +28,8 @@
     "vue-tsc": "^2.0.21"
   },
   "author": "Christian Carrillo",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
