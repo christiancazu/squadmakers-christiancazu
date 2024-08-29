@@ -64,6 +64,73 @@ importers:
         specifier: ^2.0.21
         version: 2.0.29(typescript@5.4.5)
 
+  apps/squadmakers-app:
+    dependencies:
+      christiancazu-squadmakers-lib:
+        specifier: ^0.0.0
+        version: 0.0.0
+      pinia:
+        specifier: ^2.1.7
+        version: 2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))
+      vue:
+        specifier: ^3.4.29
+        version: 3.4.38(typescript@5.4.5)
+      vue-router:
+        specifier: ^4.3.3
+        version: 4.4.3(vue@3.4.38(typescript@5.4.5))
+    devDependencies:
+      '@rushstack/eslint-patch':
+        specifier: ^1.8.0
+        version: 1.10.4
+      '@tsconfig/node20':
+        specifier: ^20.1.4
+        version: 20.1.4
+      '@types/jsdom':
+        specifier: ^21.1.7
+        version: 21.1.7
+      '@types/node':
+        specifier: ^20.14.5
+        version: 20.16.1
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.5
+        version: 5.1.2(vite@5.4.2(@types/node@20.16.1)(sass@1.77.8))(vue@3.4.38(typescript@5.4.5))
+      '@vue/eslint-config-typescript':
+        specifier: ^13.0.0
+        version: 13.0.0(eslint-plugin-vue@9.27.0(eslint@8.57.0))(eslint@8.57.0)(typescript@5.4.5)
+      '@vue/test-utils':
+        specifier: ^2.4.6
+        version: 2.4.6
+      '@vue/tsconfig':
+        specifier: ^0.5.1
+        version: 0.5.1
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      eslint-plugin-vue:
+        specifier: ^9.23.0
+        version: 9.27.0(eslint@8.57.0)
+      jsdom:
+        specifier: ^24.1.0
+        version: 24.1.3
+      npm-run-all2:
+        specifier: ^6.2.0
+        version: 6.2.2
+      sass:
+        specifier: ^1.77.8
+        version: 1.77.8
+      typescript:
+        specifier: ~5.4.0
+        version: 5.4.5
+      vite:
+        specifier: ^5.3.1
+        version: 5.4.2(@types/node@20.16.1)(sass@1.77.8)
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@20.16.1)(jsdom@24.1.3)(sass@1.77.8)
+      vue-tsc:
+        specifier: ^2.0.21
+        version: 2.0.29(typescript@5.4.5)
+
   packages/squadmakers-lib:
     devDependencies:
       '@rushstack/eslint-patch':
@@ -512,6 +579,9 @@ packages:
   '@vue/compiler-vue2@2.7.16':
     resolution: {integrity: sha512-qYC3Psj9S/mfu9uVi5WvNZIzq+xnXMhOwbTFKKDD7b1lhpnn71jXSFdTQ+WsIEk0ONCd7VV2IMm7ONl6tbQ86A==}
 
+  '@vue/devtools-api@6.6.3':
+    resolution: {integrity: sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==}
+
   '@vue/eslint-config-typescript@13.0.0':
     resolution: {integrity: sha512-MHh9SncG/sfqjVqjcuFLOLD6Ed4dRAis4HNt0dXASeAuLqIAx4YMB1/m2o4pUKK1vCt8fUvYG8KKX2Ot3BVZTg==}
     engines: {node: ^18.18.0 || >=20.0.0}
@@ -658,6 +728,10 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  christiancazu-squadmakers-lib@0.0.0:
+    resolution: {integrity: sha512-a28162vCQ32NchRHEPRcd7ryT8k8SxdsKcyMR1fcl9N5BhlcFPM/h1C8whU4+P/Z4jT/s79/hz53EPLCFGoe3g==}
+    engines: {node: '>=18.0.0'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -1269,6 +1343,18 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
+  pinia@2.2.2:
+    resolution: {integrity: sha512-ja2XqFWZC36mupU4z1ZzxeTApV7DOw44cV4dhQ9sGwun+N89v/XP7+j7q6TanS1u1tdbK4r+1BUx7heMaIdagA==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
@@ -1588,11 +1674,27 @@ packages:
   vue-component-type-helpers@2.0.29:
     resolution: {integrity: sha512-58i+ZhUAUpwQ+9h5Hck0D+jr1qbYl4voRt5KffBx8qzELViQ4XdT/Tuo+mzq8u63teAG8K0lLaOiL5ofqW38rg==}
 
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-eslint-parser@9.4.3:
     resolution: {integrity: sha512-2rYRLWlIpaiN8xbPiDyXZXRgLGOtWxERV7ND5fFAv5qo1D2N9Fu9MNajBNc6o13lZ+24DAWCkQCvj4klgmcITg==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
+
+  vue-router@4.4.3:
+    resolution: {integrity: sha512-sv6wmNKx2j3aqJQDMxLFzs/u/mjA9Z5LCgy6BE0f7yFWMjrPLnS/sPNn8ARY/FXw6byV18EFutn5lTO6+UsV5A==}
+    peerDependencies:
+      vue: ^3.2.0
 
   vue-tsc@2.0.29:
     resolution: {integrity: sha512-MHhsfyxO3mYShZCGYNziSbc63x7cQ5g9kvijV7dRe1TTXBRLxXyL0FnXWpUF1xII2mJ86mwYpYsUmMwkmerq7Q==}
@@ -2073,6 +2175,8 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
+  '@vue/devtools-api@6.6.3': {}
+
   '@vue/eslint-config-typescript@13.0.0(eslint-plugin-vue@9.27.0(eslint@8.57.0))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -2232,6 +2336,8 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  christiancazu-squadmakers-lib@0.0.0: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -2891,6 +2997,14 @@ snapshots:
 
   pidtree@0.6.0: {}
 
+  pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5)):
+    dependencies:
+      '@vue/devtools-api': 6.6.3
+      vue: 3.4.38(typescript@5.4.5)
+      vue-demi: 0.14.10(vue@3.4.38(typescript@5.4.5))
+    optionalDependencies:
+      typescript: 5.4.5
+
   pkg-dir@4.2.0:
     dependencies:
       find-up: 4.1.0
@@ -3188,6 +3302,10 @@ snapshots:
 
   vue-component-type-helpers@2.0.29: {}
 
+  vue-demi@0.14.10(vue@3.4.38(typescript@5.4.5)):
+    dependencies:
+      vue: 3.4.38(typescript@5.4.5)
+
   vue-eslint-parser@9.4.3(eslint@8.57.0):
     dependencies:
       debug: 4.3.6
@@ -3200,6 +3318,11 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
+
+  vue-router@4.4.3(vue@3.4.38(typescript@5.4.5)):
+    dependencies:
+      '@vue/devtools-api': 6.6.3
+      vue: 3.4.38(typescript@5.4.5)
 
   vue-tsc@2.0.29(typescript@5.4.5):
     dependencies:

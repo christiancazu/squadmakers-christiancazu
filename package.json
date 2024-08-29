@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Squadmakers Frontend Challenge",
   "scripts": {
-    "lib": "pnpm --filter christiancazu-squadmakers-lib"
+    "lib": "pnpm --filter christiancazu-squadmakers-lib",
+    "app": "pnpm --filter christiancazu-squadmakers-app"
   },
   "dependencies": {
     "vue": "^3.4.29"
