@@ -10,5 +10,10 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules: {
+    'no-trailing-spaces': 'warn',
+    'vue/multi-word-component-names': 'off',
+    'eol-last': ["warn", "always"]
   }
 }
