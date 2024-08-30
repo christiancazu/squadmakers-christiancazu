@@ -66,13 +66,13 @@ function handleClearFilter() {
 
   &__close {
     position: absolute;
-    bottom: 8px;
     right: 24px;
     border-radius: 50%;
     padding-inline: 4px;
     color: red;
     cursor: pointer;
-    border: 1px solid whitesmoke;
+    top: 50%;
+  transform: translateY(-50%);
     background-color: whitesmoke;
 
     &:hover {
