@@ -2,7 +2,7 @@
   <label class="sm-search-input">
     <div class="sm-search-input__icon --left">
       <svg
-        v-if="filters.isLoading"
+        v-if="search.isLoading"
         xmlns="http://www.w3.org/2000/svg"
         width="28"
         height="28"
@@ -60,17 +60,17 @@
     </div>
 
     <div
-      v-if="filtersApplied"
+      v-if="search.filters?.length"
       class="sm-search-input__filters"
     >
       <span class="sm-search-input__filters__label">Filters applied: </span>
-      <p>{{ filtersApplied }}</p>
+      <p>{{ search.filters.join(', ') }}</p>
     </div>
   </label>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useModal, useModalSlot } from 'vue-final-modal';
 import { useDebounce } from '@vueuse/core';
 
@@ -78,32 +78,14 @@ import BaseModal from './BaseModal.vue';
 import Filters from './Filters.vue';
 import { useFilters } from '@/composables';
 
-const { filters, onSearchCharacters } = useFilters()
+const { search, onSearchCharacters } = useFilters()
 
 const filter = ref('')
 
 const filterDebounced = useDebounce(filter, 1000)
 
-const filtersApplied = computed(() => {
-  const _filters: String[] = []
-
-  if (filters.status) {
-    _filters.push('status')
-  }
-
-  if (filters.species) {
-    _filters.push('species')
-  }
-
-  if (filters.type) {
-    _filters.push('type')
-  }
-
-  return _filters.join(', ')
-})
-
 watch(filterDebounced, (newValue: string) => {
-  filters.name = newValue
+  search.text = newValue
   onSearchCharacters()
 })
 

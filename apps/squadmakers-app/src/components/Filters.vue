@@ -4,25 +4,11 @@
       Filters
     </h1>
     <div class="sm-filters__content">
-      <FilterSelect
-        id="filter-status"
-        v-model="filters.status"
-        placeholder="Select status"
+      <Multiselect
+        v-model="search.filters"
+        mode="tags"
+        placeholder="Search by status, species, or type"
         :options="filterStatus"
-      />
-
-      <FilterSelect
-        id="filter-species"
-        v-model="filters.species"
-        placeholder="Select species"
-        :options="filterSpecies"
-      />
-
-      <FilterSelect
-        id="filter-types"
-        v-model="filters.type"
-        placeholder="Select type"
-        :options="filterTypes"
       />
     </div>
 
@@ -45,20 +31,18 @@
 </template>
 
 <script setup lang="ts">
-import FilterSelect from './FilterSelect.vue';
 import Button from './Button.vue';
 import { useFilters } from '@/composables';
+import Multiselect from '@vueform/multiselect';
 
 defineProps<{
   handleClose: () => void
   handleSearch: () => void
 }>()
 
-const { filters } = useFilters()
+const { search } = useFilters()
 
-const filterStatus = ['Alive', 'Dead', 'Unknown']
-const filterSpecies = ['Human', 'Humanoid']
-const filterTypes = ['Planet', 'Space station', 'Dimension C', 'Rick\'s Toxic Side']
+const filterStatus = ['status', 'species', 'type']
 </script>
 
 <style scoped lang="scss">
@@ -87,3 +71,5 @@ const filterTypes = ['Planet', 'Space station', 'Dimension C', 'Rick\'s Toxic Si
   }
 }
 </style>
+
+<style src="@vueform/multiselect/themes/default.css"></style>

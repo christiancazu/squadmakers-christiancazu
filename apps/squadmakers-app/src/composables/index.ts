@@ -1,32 +1,28 @@
 import { reactive } from "vue"
 
-export type TypeFilters = {
-  name: string
-  status: string
-  species: string
-  type: string
+export type TypeSearch = {
+  text: string
+  filters: string[]
   isLoading: boolean
-  onSearch: () => void
+  trigger: () => void
 }
 
-const _filters: TypeFilters = {
-  name: '',
-  status: '',
-  species: '',
-  type: '',
+const filters: TypeSearch = {
+  text: '',
+  filters: [],
   isLoading: false,
-  onSearch: () => {}
+  trigger: () => {}
 }
 
 export const useFilters = (cb?: () => void) => {
-  const filters = reactive(_filters)
+  const search = reactive(filters)
 
   if (cb) {
-    filters.onSearch = cb
+    search.trigger = cb
   }
 
   return {
-    filters,
-    onSearchCharacters: () => filters.onSearch()
+    search,
+    onSearchCharacters: () => search.trigger()
   }
 }

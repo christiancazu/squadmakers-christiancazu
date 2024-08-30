@@ -66,6 +66,9 @@ importers:
 
   apps/squadmakers-app:
     dependencies:
+      '@vueform/multiselect':
+        specifier: ^2.6.9
+        version: 2.6.9
       '@vueuse/core':
         specifier: ^11.0.3
         version: 11.0.3(vue@3.4.38(typescript@5.4.5))
@@ -577,6 +580,9 @@ packages:
 
   '@vue/tsconfig@0.5.1':
     resolution: {integrity: sha512-VcZK7MvpjuTPx2w6blwnwZAu5/LgBUtejFOi3pPGQFXQN5Ela03FUtd2Qtg4yWGGissVL0dr6Ro1LfOFh+PCuQ==}
+
+  '@vueform/multiselect@2.6.9':
+    resolution: {integrity: sha512-eW+pMaWFGnK+WGvUPcB/mEwLx/5Y4VB8wRFGFQZ9c5Wi+K/xFrm/nQ/NbtrFQUcX0nbuQWKYnFBmwa5MENGQxw==}
 
   '@vueuse/core@11.0.3':
     resolution: {integrity: sha512-RENlh64+SYA9XMExmmH1a3TPqeIuJBNNB/63GT35MZI+zpru3oMRUA6cEFr9HmGqEgUisurwGwnIieF6qu3aXw==}
@@ -2252,6 +2258,8 @@ snapshots:
       vue-component-type-helpers: 2.0.29
 
   '@vue/tsconfig@0.5.1': {}
+
+  '@vueform/multiselect@2.6.9': {}
 
   '@vueuse/core@11.0.3(vue@3.4.38(typescript@5.4.5))':
     dependencies:
