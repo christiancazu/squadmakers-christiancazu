@@ -97,6 +97,7 @@ Then you need to register it:
 | Name | Arguments | Description |
 | ---: | --- | --- |
 | toggleFavorite | id(Number) | Emitted when favorite button is toggled |
+| selectCharacter | id(Number) | Emitted when a character is selected |
 
 ## Usage Favorite
 

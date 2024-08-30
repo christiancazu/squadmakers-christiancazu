@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import Tarjeta, { Character } from '../Tarjeta/Tarjeta.vue'
@@ -35,9 +35,26 @@ describe('Tarjeta', () => {
     expect(wrapper.props().character).toBeTruthy()
   })
 
-  it('emit toggle event', async () => {
+  it('emit toggleFavorite event', async () => {
+    const el = wrapper.find('.sm-favorite')
+
     wrapper.getComponent(Favorite).vm.$emit('toggleFavorite')
 
-    expect(wrapper.emitted('toggleFavorite')).toBeTruthy()
+    await el.trigger('click')
+    const toggleFavoriteEvent = wrapper.emitted('toggleFavorite')
+
+    expect(toggleFavoriteEvent).toBeTruthy()
+  })
+
+  it('emit selectCharacter event', async () => {
+    const el = wrapper.find('.sm-card__content__top__text')
+    const toggleFavorite = vi.spyOn(el, 'trigger')
+
+    await el.trigger('click')
+    const selectCharacterEvent = wrapper.emitted('selectCharacter')
+
+    expect(toggleFavorite).toHaveBeenCalledOnce()
+    expect(selectCharacterEvent).toBeTruthy()
+    expect(selectCharacterEvent).toEqual([[1]])
   })
 })

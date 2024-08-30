@@ -1,18 +1,31 @@
 <template>
   <article class="sm-card">
     <figure class="sm-card__figure">
-      <img class="sm-card__figure__image" :src="character.image" :alt="character.name">
+      <img
+        class="sm-card__figure__image"
+        :src="character.image"
+        :alt="character.name"
+      >
       <div class="sm-card__figure__favorite">
-        <Favorite :is-favorite="character.isFavorite" @toggle-favorite="$emit('toggleFavorite', character.id)" />
+        <Favorite
+          :is-favorite="character.isFavorite"
+          @toggle-favorite="$emit('toggleFavorite', character.id)"
+        />
       </div>
     </figure>
     <div class="sm-card__content">
       <div class="sm-card__content__top">
         <label class="sm-card__content__top__label">
-          <div class="sm-card__content__top__label__status" :style="{ backgroundColor: status[character.status] }" />
+          <div
+            class="sm-card__content__top__label__status"
+            :style="{ backgroundColor: status[character.status] }"
+          />
           {{ character.status }} - {{ character.species }}
         </label>
-        <p class="sm-card__content__top__text">
+        <p
+          class="sm-card__content__top__text"
+          @click="$emit('selectCharacter', character.id)"
+        >
           {{ character.name }}
         </p>
       </div>
@@ -64,7 +77,7 @@ defineProps<{
   character: Character
 }>()
 
-defineEmits(['toggleFavorite'])
+defineEmits(['toggleFavorite', 'selectCharacter'])
 
 const status = {
   "Alive": "#27AE60",
@@ -82,6 +95,7 @@ $border-radius: 10px;
   height: 140px;
   border-radius: $border-radius;
   border: 1px solid #E0E0E0;
+  overflow: hidden;
 
   &__figure {
     height: 140px;
@@ -132,6 +146,13 @@ $border-radius: 10px;
       &__text {
         font-size: 16px;
         line-height: 19.5px;
+        animation: all .5s;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+          color: blue;
+        }
       }
     }
 
