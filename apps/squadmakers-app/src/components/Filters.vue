@@ -8,7 +8,7 @@
         v-model="search.filters"
         mode="tags"
         placeholder="Search by status, species, or type"
-        :options="filterStatus"
+        :options="filters"
       />
     </div>
 
@@ -31,9 +31,10 @@
 </template>
 
 <script setup lang="ts">
+import Multiselect from '@vueform/multiselect';
+
 import Button from './Button.vue';
 import { useFilters } from '@/composables';
-import Multiselect from '@vueform/multiselect';
 
 defineProps<{
   handleClose: () => void
@@ -42,7 +43,7 @@ defineProps<{
 
 const { search } = useFilters()
 
-const filterStatus = ['status', 'species', 'type']
+const filters = ['status', 'species', 'type']
 </script>
 
 <style scoped lang="scss">

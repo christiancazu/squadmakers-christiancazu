@@ -3,6 +3,7 @@ import { reactive } from "vue"
 export type TypeSearch = {
   text: string
   filters: string[]
+  gender: string,
   isLoading: boolean
   trigger: () => void
 }
@@ -10,6 +11,7 @@ export type TypeSearch = {
 const filters: TypeSearch = {
   text: '',
   filters: [],
+  gender: 'all',
   isLoading: false,
   trigger: () => {}
 }
