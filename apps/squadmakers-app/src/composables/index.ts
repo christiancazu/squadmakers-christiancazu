@@ -4,6 +4,7 @@ export type TypeSearch = {
   text: string
   filters: string[]
   gender: string,
+  page: number
   isLoading: boolean
   trigger: () => void
 }
@@ -12,6 +13,7 @@ const filters: TypeSearch = {
   text: '',
   filters: [],
   gender: 'all',
+  page: 1,
   isLoading: false,
   trigger: () => {}
 }

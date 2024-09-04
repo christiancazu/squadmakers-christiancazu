@@ -1,7 +1,8 @@
 <template>
   <button
     class="sm-button"
-    :style="flat && `background: whitesmoke; color: #11555F`"
+    :class="{ '--flat': flat, '--disabled': disabled, '--circle': circle }"
+    :disabled="disabled"
   >
     {{ label }}
   </button>
@@ -9,13 +10,16 @@
 
 <script setup lang="ts">
 defineProps<{
-  label: string
+  label: string | number
   flat?: boolean
+  disabled?: boolean
+  circle?: boolean
 }>()
 </script>
 
 <style lang="scss" scoped>
 $color: #11555F;
+
 .sm-button {
   background: $color;
   border: 1px solid $color;
@@ -32,6 +36,20 @@ $color: #11555F;
 
   &:hover {
     filter: brightness(95%);
+  }
+
+  &.--flat {
+    background: whitesmoke;
+    color: #11555F;
+  }
+
+  &.--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.--circle {
+    border-radius: 50%;
   }
 }
 </style>

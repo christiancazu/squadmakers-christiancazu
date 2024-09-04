@@ -18,3 +18,10 @@ export type Origin = {
   name: string;
   url: string;
 }
+
+export type Pagination = {
+  count: number
+  pages: number
+  next: string
+  prev: string
+} | null

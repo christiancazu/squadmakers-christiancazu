@@ -17,7 +17,7 @@
         <Button
           label="Cancel"
           flat
-          @click="handleClose"
+          @click="beforeHandleClose"
         />
       </div>
       <div>
@@ -36,12 +36,19 @@ import Multiselect from '@vueform/multiselect';
 import Button from './Button.vue';
 import { useFilters } from '@/composables';
 
-defineProps<{
+const props = defineProps<{
   handleClose: () => void
   handleSearch: () => void
 }>()
 
 const { search } = useFilters()
+
+const prevFilters = search.filters
+
+function beforeHandleClose() {
+  search.filters = prevFilters
+  props.handleClose()
+}
 
 const filters = ['status', 'species', 'type']
 </script>

@@ -4,15 +4,23 @@
     <TabFilters />
 
     <div class="sm-characters-view__content">
-      <div class="sm-characters-view__content__title">
-        <p>Show favorites:</p>
-        <Favorite
-          :is-favorite="showFavorites"
-          @toggle-favorite="showFavorites = !showFavorites"
-        />
+      <div class="sm-characters-view__content__top">
+        <div class="sm-characters-view__content__top__left">
+          <p>Show favorites:</p>
+          <Favorite
+            :is-favorite="showFavorites"
+            @toggle-favorite="showFavorites = !showFavorites"
+          />
+        </div>
+        <div
+          v-if="pagination"
+          class="sm-characters-view__content__top__right"
+        >
+          <Pagination :info="pagination" />
+        </div>
       </div>
       <div class="sm-characters-view__content__characters">
-        <template v-if="!isFetching">
+        <template v-if="!search.isLoading">
           <div
             v-for="(character, index) in characters"
             :key="index"
@@ -41,15 +49,17 @@ import TabFilters from '@/components/TabFilters.vue';
 import Spinner from '@/components/Spinner.vue';
 import BaseModal from '@/components/BaseModal.vue';
 import Details from '@/components/Details.vue';
-import type { Character } from '@/models';
+import type { Character, Pagination as PaginationType } from '@/models';
 import EmptyResult from '@/components/EmptyResult.vue';
 import { useFilters } from '@/composables';
 
 import { ModalsContainer, useModal, useModalSlot } from 'vue-final-modal';
 import { Favorite, Tarjeta } from 'christiancazu-squadmakers-lib';
+import Pagination from '@/components/Pagination.vue';
 
-const showFavorites = ref(false)
 const characters = shallowRef<Character[]>([])
+const pagination = ref<PaginationType>()
+const showFavorites = ref(false)
 
 const API_URL = 'https://rickandmortyapi.com/api/character'
 
@@ -59,8 +69,9 @@ const { search } = useFilters(() => {
   const _url = new URL(API_URL)
 
   _url.search = new URLSearchParams({
-    name: search.text,
-    ...Object.assign({}, ...search.filters.map((filter) => ({ [filter]: search.text }))),
+    ...(search.text && { name: search.text }),
+    page: search.page,
+    ...Object.assign({}, ...search.filters.map((filter) => ({ [filter]: search.text })).filter(() => search.text)),
     ...(search.gender && search.gender !== 'all' && { gender: search.gender }),
   }).toString()
 
@@ -69,17 +80,26 @@ const { search } = useFilters(() => {
   executeFetchCharacters()
 })
 
-const { execute: executeFetchCharacters, isFetching, error, onFetchError }
+const { execute: executeFetchCharacters, error, onFetchError }
   = useFetch(url, {
-    immediate: false, afterFetch: (data) => {
+    immediate: false,
+    afterFetch: (data) => {
       characters.value = data.data.results
+      pagination.value = data.data.info
+      search.isLoading = false
       return data
-    }
+    },
+    beforeFetch: () => {
+      search.isLoading = true
+    },
   }).get().json()
 
-  onFetchError(() => {
-    characters.value = []
-  })
+onFetchError(() => {
+  characters.value = []
+  pagination.value = null
+  search.isLoading = false
+  search.page = 1
+})
 
 function handleSelectCharacter(id: number) {
   const { onFetchResponse } = useFetch(`${API_URL}/${id}`)
@@ -118,14 +138,19 @@ function handleSelectCharacter(id: number) {
     max-width: 1030px;
     margin: auto;
 
-    &__title {
-      display: flex;
-      align-items: center;
+    &__top {
       margin: 32px 0;
+      display: flex;
+      justify-content: space-between;
 
-      &>p {
-        font-size: 14px;
-        margin-right: 8px;
+      &__left {
+        display: flex;
+        align-items: center;
+
+        &>p {
+          font-size: 14px;
+          margin-right: 8px;
+        }
       }
     }
 

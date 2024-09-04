@@ -8,7 +8,7 @@
         ¡You seem lost on your journey!
       </p>
       <Button
-        label="Eliminar filtros"
+        label="Clear filters"
         @click="handleClearFilters"
       />
     </div>

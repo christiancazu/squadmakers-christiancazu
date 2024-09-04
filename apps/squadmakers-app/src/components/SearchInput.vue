@@ -80,7 +80,10 @@ import { useFilters } from '@/composables';
 
 const { search, onSearchCharacters } = useFilters()
 
-const debouncedFn = useDebounceFn(() => onSearchCharacters(), 1000);
+const debouncedFn = useDebounceFn(() => {
+  search.page = 1
+  onSearchCharacters()
+}, 1000);
 
 watch(() => search.text, () => debouncedFn())
 
@@ -94,6 +97,7 @@ const { open, close } = useModal({
           close()
         },
         handleSearch() {
+          search.page = 1
           onSearchCharacters()
           close()
         },

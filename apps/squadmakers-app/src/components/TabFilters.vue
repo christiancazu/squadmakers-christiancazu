@@ -28,6 +28,7 @@ const { search, onSearchCharacters } = useFilters()
 
 function handleActiveTab(gender: string) {
   search.gender = gender
+  search.page = 1
   onSearchCharacters()
 }
 </script>
