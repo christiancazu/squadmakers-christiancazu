@@ -73,8 +73,8 @@ importers:
         specifier: ^11.0.3
         version: 11.0.3(vue@3.4.38(typescript@5.4.5))
       christiancazu-squadmakers-lib:
-        specifier: ^0.0.0
-        version: 0.0.0
+        specifier: ^0.0.1
+        version: 0.0.1
       pinia:
         specifier: ^2.1.7
         version: 2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))
@@ -739,8 +739,8 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  christiancazu-squadmakers-lib@0.0.0:
-    resolution: {integrity: sha512-a28162vCQ32NchRHEPRcd7ryT8k8SxdsKcyMR1fcl9N5BhlcFPM/h1C8whU4+P/Z4jT/s79/hz53EPLCFGoe3g==}
+  christiancazu-squadmakers-lib@0.0.1:
+    resolution: {integrity: sha512-nKWbmXxMVGwV8NK9+qAfgUjg2MupwDVXo8qu9BAjsq4QmUV0VeKJ0BfP7pxirmsbl/aEv7nSbsX3CjmwvqL0Lg==}
     engines: {node: '>=18.0.0'}
 
   color-convert@2.0.1:
@@ -2395,7 +2395,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  christiancazu-squadmakers-lib@0.0.0: {}
+  christiancazu-squadmakers-lib@0.0.1: {}
 
   color-convert@2.0.1:
     dependencies:

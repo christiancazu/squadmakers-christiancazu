@@ -12,13 +12,20 @@
         />
       </div>
       <div class="sm-characters-view__content__characters">
-        <div
-          v-for="(character, index) in characters"
-          :key="index"
-        >
-          <Tarjeta :character="character" />
-        </div>
+        <template v-if="!isFetching">
+          <div
+            v-for="(character, index) in characters"
+            :key="index"
+          >
+            <Tarjeta
+              :character="character"
+              @select-character="handleSelectCharacter"
+            />
+          </div>
+        </template>
+        <Spinner v-else />
       </div>
+      <EmptyResult v-if="error" />
     </div>
   </div>
 
@@ -26,18 +33,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import { useFetch } from '@vueuse/core';
-import Hero from '@/components/Hero.vue';
-import { useFilters } from '@/composables';
-import { Favorite, Tarjeta } from 'christiancazu-squadmakers-lib';
-import { ModalsContainer } from 'vue-final-modal';
-import TabFilters from '@/components/TabFilters.vue';
 
-const characters = ref([])
+import Hero from '@/components/Hero.vue';
+import TabFilters from '@/components/TabFilters.vue';
+import Spinner from '@/components/Spinner.vue';
+import BaseModal from '@/components/BaseModal.vue';
+import Details from '@/components/Details.vue';
+import type { Character } from '@/models';
+import EmptyResult from '@/components/EmptyResult.vue';
+import { useFilters } from '@/composables';
+
+import { ModalsContainer, useModal, useModalSlot } from 'vue-final-modal';
+import { Favorite, Tarjeta } from 'christiancazu-squadmakers-lib';
+
+const showFavorites = ref(false)
+const characters = shallowRef<Character[]>([])
+
+const API_URL = 'https://rickandmortyapi.com/api/character'
+
+const url = ref(API_URL)
 
 const { search } = useFilters(() => {
-  const _url = new URL('https://rickandmortyapi.com/api/character')
+  const _url = new URL(API_URL)
 
   _url.search = new URLSearchParams({
     name: search.text,
@@ -45,26 +64,48 @@ const { search } = useFilters(() => {
     ...(search.gender && search.gender !== 'all' && { gender: search.gender }),
   }).toString()
 
-  const { onFetchResponse, onFetchError, onFetchFinally } = useFetch(_url.toString())
+  url.value = _url.toString()
 
-  search.isLoading = true
+  executeFetchCharacters()
+})
 
-  onFetchResponse(response => {
-    response.json().then(({ results }) => {
-      characters.value = results
-    })
-  })
+const { execute: executeFetchCharacters, isFetching, error, onFetchError }
+  = useFetch(url, {
+    immediate: false, afterFetch: (data) => {
+      characters.value = data.data.results
+      return data
+    }
+  }).get().json()
 
   onFetchError(() => {
     characters.value = []
   })
 
-  onFetchFinally(() => {
-    search.isLoading = false
-  })
-})
+function handleSelectCharacter(id: number) {
+  const { onFetchResponse } = useFetch(`${API_URL}/${id}`)
 
-const showFavorites = ref(false)
+  onFetchResponse(response => {
+    response.json().then((character) => {
+      const { open, close } = useModal({
+        component: BaseModal,
+        attrs: {
+          noPadding: true,
+          scroll: true
+        },
+        slots: {
+          default: useModalSlot({
+            component: Details,
+            attrs: {
+              close: () => close(),
+              character
+            }
+          })
+        }
+      })
+      open()
+    })
+  })
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,15 +1,23 @@
 <script setup lang="ts">
+import {withDefaults}from 'vue'
+
 import { VueFinalModal } from 'vue-final-modal'
 
-defineProps<{
-  title?: string
-}>()
+withDefaults(defineProps<{
+  noPadding?: boolean
+  scroll?: boolean
+}>(), {
+  nopadding: false,
+  scroll: false
+})
+
 </script>
 
 <template>
   <VueFinalModal
-    class="confirm-modal"
-    content-class="confirm-modal-content"
+    class="base-modal"
+    :class="{ '--no-padding': noPadding, '--scroll': scroll }"
+    content-class="base-modal-content"
     overlay-transition="vfm-fade"
     content-transition="vfm-fade"
     background="interactive"
@@ -19,41 +27,29 @@ defineProps<{
   </VueFinalModal>
 </template>
 
-<style>
-.confirm-modal {
+<style lang="scss">
+.base-modal {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.confirm-modal-content {
-  display: flex;
-  flex-direction: column;
+.base-modal-content {
   padding: 1rem;
   background: #fff;
   border-radius: 0.5rem;
-
-  max-width: 900px;
-  width: 90%;
+  max-width: 756px;
+  width: 100%;
+  overflow: auto;
+  margin-top: 54px;
+  margin-bottom: 54px;
 }
 
-.confirm-modal-content>*+* {
-  margin: 0.5rem 0;
+.base-modal.--no-padding .base-modal-content {
+  padding: 0;
 }
-
-.confirm-modal-content h1 {
-  font-size: 1.375rem;
-}
-
-.confirm-modal-content button {
-  margin: 0.25rem 0 0 auto;
-  padding: 0 8px;
-  border: 1px solid;
-  border-radius: 0.5rem;
-}
-
-.dark .confirm-modal-content {
-  background: #000;
+.base-modal.--scroll .base-modal-content {
+  height: 100%;
 }
 
 .vfm--prevent-none {

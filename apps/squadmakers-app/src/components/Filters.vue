@@ -48,13 +48,17 @@ const filters = ['status', 'species', 'type']
 
 <style scoped lang="scss">
 .sm-filters {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
   &__title {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   &__content {
     max-width: 1030px;
-    margin: auto;
     justify-items: center;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -64,7 +68,8 @@ const filters = ['status', 'species', 'type']
   &__actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 32px;
+    margin-top: auto;
+
 
     & > div {
       margin-left: 16px;

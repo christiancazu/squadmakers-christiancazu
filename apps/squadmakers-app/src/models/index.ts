@@ -1,11 +1,20 @@
-export type Filters = {
-  gender: FilterGenter
-  type: FilterType
-  status: FilterStatus
-  especies: FilterSpecies
+export type Character = {
+  id: number;
+  name: string;
+  status: 'Alive' | 'Dead' | 'unknown';
+  species: string;
+  type: string;
+  gender: string;
+  origin: Origin;
+  location: Origin;
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
+  isFavorite?: boolean;
 }
 
-export type FilterGenter = 'all' | 'unknown' | 'female' | 'male' | 'genderless'
-export type FilterType = 'Planet' | 'Space station' | 'Dimension' | 'Rick\'s Toxic Side'
-export type FilterStatus = 'alive' | 'dead' | 'unknown'
-export type FilterSpecies = 'Human' | 'Humanoid'
+export type Origin = {
+  name: string;
+  url: string;
+}

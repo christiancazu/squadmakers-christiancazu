@@ -37,7 +37,7 @@
 
     </div>
     <input
-      v-model="filter"
+      v-model="search.text"
       placeholder="Search character..."
       class="sm-search-input__input"
     >
@@ -70,9 +70,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 import { useModal, useModalSlot } from 'vue-final-modal';
-import { useDebounce } from '@vueuse/core';
+import { useDebounceFn } from '@vueuse/core';
 
 import BaseModal from './BaseModal.vue';
 import Filters from './Filters.vue';
@@ -80,14 +80,9 @@ import { useFilters } from '@/composables';
 
 const { search, onSearchCharacters } = useFilters()
 
-const filter = ref('')
+const debouncedFn = useDebounceFn(() => onSearchCharacters(), 1000);
 
-const filterDebounced = useDebounce(filter, 1000)
-
-watch(filterDebounced, (newValue: string) => {
-  search.text = newValue
-  onSearchCharacters()
-})
+watch(() => search.text, () => debouncedFn())
 
 const { open, close } = useModal({
   component: BaseModal,

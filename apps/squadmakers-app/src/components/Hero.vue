@@ -29,17 +29,16 @@ import imageBg from '@/assets/bg.png'
 .sm-hero {
   height: 455px;
   max-width: 1440px;
-  border: 1px solid black;
   overflow: hidden;
   position: relative;
   display: flex;
   justify-content: center;
 
   &__bg {
-    width: 100%;
     position: absolute;
-    top: 0;
+    width: 100%;
     height: 100%;
+    top: 0;
     bottom: 0;
     margin: auto;
 
