@@ -9,7 +9,7 @@
       <div class="sm-card__figure__favorite">
         <Favorite
           :is-favorite="character.isFavorite"
-          @toggle-favorite="$emit('toggleFavorite', character.id)"
+          @toggle-favorite="$emit('toggleFavorite', character)"
         />
       </div>
     </figure>
@@ -126,6 +126,7 @@ $border-radius: 10px;
     flex-direction: column;
     justify-content: space-around;
     text-overflow: ellipsis;
+    font-size: 10px;
 
     &__top {
       &__label {
