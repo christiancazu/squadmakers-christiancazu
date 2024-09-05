@@ -29,7 +29,7 @@ import { useFilters } from '@/composables';
 import Button from './Button.vue';
 import type { Pagination } from '@/models';
 
-const {search, onSearchCharacters} = useFilters()
+const { search, onSearchCharacters } = useFilters()
 
 defineProps<{
   info: Pagination

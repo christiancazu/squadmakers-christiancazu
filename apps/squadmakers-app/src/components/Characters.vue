@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { toRef, useFetch, useVModel } from '@vueuse/core';
-import { Tarjeta } from 'christiancazu-squadmakers-lib';
+import { useFetch } from '@vueuse/core';
 import { useModal, useModalSlot } from 'vue-final-modal';
+import { Tarjeta } from 'christiancazu-squadmakers-lib';
 
 import EmptyResult from './EmptyResult.vue';
 import Spinner from './Spinner.vue';
@@ -32,7 +32,7 @@ import { storeToRefs } from 'pinia';
 
 const API_URL = import.meta.env.VITE_API_URL + '/character'
 
-const props = defineProps<{
+defineProps<{
   characters: Character[] | undefined
   error?: string
 }>()
@@ -40,7 +40,7 @@ const props = defineProps<{
 const emit = defineEmits(['update-favorite'])
 
 const favoriteStore = useFavoritesStore()
-const { favorites, getFavoriteIds, isFavoriteSelected } = storeToRefs(favoriteStore)
+const { isFavoriteSelected } = storeToRefs(favoriteStore)
 const { search } = useFilters()
 
 function handleSelectCharacter(id: number) {

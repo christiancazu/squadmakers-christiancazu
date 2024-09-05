@@ -73,17 +73,24 @@ importers:
         specifier: ^11.0.3
         version: 11.0.3(vue@3.4.38(typescript@5.4.5))
       christiancazu-squadmakers-lib:
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.0.2
+        version: 0.0.2
       pinia:
-        specifier: ^2.1.7
+        specifier: ^2.2.2
         version: 2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))
+      pinia-plugin-persistedstate:
+        specifier: ^3.2.3
+        version: 3.2.3(pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5)))
       vue-final-modal:
         specifier: ^4.5.4
         version: 4.5.4(@vueuse/core@11.0.3(vue@3.4.38(typescript@5.4.5)))(@vueuse/integrations@11.0.3(focus-trap@7.5.4)(vue@3.4.38(typescript@5.4.5)))(focus-trap@7.5.4)(vue@3.4.38(typescript@5.4.5))
       vue-router:
         specifier: ^4.3.3
         version: 4.4.3(vue@3.4.38(typescript@5.4.5))
+    devDependencies:
+      '@pinia/testing':
+        specifier: ^0.1.5
+        version: 0.1.5(pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5)))(vue@3.4.38(typescript@5.4.5))
 
   packages/squadmakers-lib:
     devDependencies:
@@ -316,6 +323,11 @@ packages:
 
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
+
+  '@pinia/testing@0.1.5':
+    resolution: {integrity: sha512-AcGzuotkzhRoF00htuxLfIPBBHVE6HjjB3YC5Y3os8vRgKu6ipknK5GBQq9+pduwYQhZ+BcCZDC9TyLAUlUpoQ==}
+    peerDependencies:
+      pinia: '>=2.2.1'
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -739,8 +751,8 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  christiancazu-squadmakers-lib@0.0.1:
-    resolution: {integrity: sha512-nKWbmXxMVGwV8NK9+qAfgUjg2MupwDVXo8qu9BAjsq4QmUV0VeKJ0BfP7pxirmsbl/aEv7nSbsX3CjmwvqL0Lg==}
+  christiancazu-squadmakers-lib@0.0.2:
+    resolution: {integrity: sha512-Gj92UNcSXCoV4udc//puQ7sCKeF0bK1cjO1URw5zLtas9PIQlYuvSlHI5bMzV5+LBby14VUlsk7KezMjbkeNKQ==}
     engines: {node: '>=18.0.0'}
 
   color-convert@2.0.1:
@@ -1356,6 +1368,11 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
+  pinia-plugin-persistedstate@3.2.3:
+    resolution: {integrity: sha512-Cm819WBj/s5K5DGw55EwbXDtx+EZzM0YR5AZbq9XE3u0xvXwvX2JnWoFpWIcdzISBHqy9H1UiSIUmXyXqWsQRQ==}
+    peerDependencies:
+      pinia: ^2.0.0
+
   pinia@2.2.2:
     resolution: {integrity: sha512-ja2XqFWZC36mupU4z1ZzxeTApV7DOw44cV4dhQ9sGwun+N89v/XP7+j7q6TanS1u1tdbK4r+1BUx7heMaIdagA==}
     peerDependencies:
@@ -1959,6 +1976,14 @@ snapshots:
 
   '@one-ini/wasm@0.1.1': {}
 
+  '@pinia/testing@0.1.5(pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5)))(vue@3.4.38(typescript@5.4.5))':
+    dependencies:
+      pinia: 2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))
+      vue-demi: 0.14.10(vue@3.4.38(typescript@5.4.5))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -2395,7 +2420,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  christiancazu-squadmakers-lib@0.0.1: {}
+  christiancazu-squadmakers-lib@0.0.2: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -3058,6 +3083,10 @@ snapshots:
   picomatch@2.3.1: {}
 
   pidtree@0.6.0: {}
+
+  pinia-plugin-persistedstate@3.2.3(pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))):
+    dependencies:
+      pinia: 2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5))
 
   pinia@2.2.2(typescript@5.4.5)(vue@3.4.38(typescript@5.4.5)):
     dependencies:
