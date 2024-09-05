@@ -146,13 +146,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useFetch } from '@vueuse/core';
-
-import type { Character } from '@/models';
-import Spinner from './Spinner.vue';
-import Button from './Button.vue';
 import { Favorite, Tarjeta } from 'christiancazu-squadmakers-lib';
 
+import Spinner from './Spinner.vue';
+import Button from './Button.vue';
+import type { Character } from '@/models';
+
 import imageBg from '@/assets/bg-details.jpeg'
+
+const API_URL = import.meta.env.VITE_API_URL + '/episode'
 
 const props = defineProps<{
   close: () => void
@@ -162,7 +164,7 @@ const props = defineProps<{
 const episodeIds = props.character?.episode.map((e) => e.split('/').pop()).join(',')
 
 const { data: episodes, isFetching: isFetchingEpisodes }
-  = useFetch(`https://rickandmortyapi.com/api/episode/${episodeIds}`).get().json()
+  = useFetch(`${API_URL}/${episodeIds}`).get().json()
 
 const parseDate = computed(() => (date: string) => {
   const _date = new Date(date)

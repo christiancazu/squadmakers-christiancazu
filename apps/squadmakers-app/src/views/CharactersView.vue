@@ -9,31 +9,23 @@
           <p>Show favorites:</p>
           <Favorite
             :is-favorite="showFavorites"
-            @toggle-favorite="showFavorites = !showFavorites"
+            @toggle-favorite="handleShowFavorites"
           />
         </div>
         <div
-          v-if="pagination"
+          v-if="!showFavorites && pagination"
           class="sm-characters-view__content__top__right"
         >
           <Pagination :info="pagination" />
         </div>
       </div>
       <div class="sm-characters-view__content__characters">
-        <template v-if="!search.isLoading">
-          <div
-            v-for="(character, index) in characters"
-            :key="index"
-          >
-            <Tarjeta
-              :character="character"
-              @select-character="handleSelectCharacter"
-            />
-          </div>
-        </template>
-        <Spinner v-else />
+        <Characters
+          :characters="showFavorites ? favorites : characters"
+          :error="error"
+          @update-favorite="handleToogleFavorite"
+        />
       </div>
-      <EmptyResult v-if="error" />
     </div>
   </div>
 
@@ -41,29 +33,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue';
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useFetch } from '@vueuse/core';
 
 import Hero from '@/components/Hero.vue';
 import TabFilters from '@/components/TabFilters.vue';
-import Spinner from '@/components/Spinner.vue';
-import BaseModal from '@/components/BaseModal.vue';
-import Details from '@/components/Details.vue';
 import type { Character, Pagination as PaginationType } from '@/models';
-import EmptyResult from '@/components/EmptyResult.vue';
 import { useFilters } from '@/composables';
 
-import { ModalsContainer, useModal, useModalSlot } from 'vue-final-modal';
-import { Favorite, Tarjeta } from 'christiancazu-squadmakers-lib';
+import { ModalsContainer } from 'vue-final-modal';
+import { Favorite } from 'christiancazu-squadmakers-lib';
 import Pagination from '@/components/Pagination.vue';
+import Characters from '@/components/Characters.vue';
+import { useFavoritesStore } from '@/stores/favorites';
 
-const characters = shallowRef<Character[]>([])
+const characters = ref<Character[]>([])
 const pagination = ref<PaginationType>()
 const showFavorites = ref(false)
 
-const API_URL = 'https://rickandmortyapi.com/api/character'
+const API_URL = import.meta.env.VITE_API_URL + '/character'
 
 const url = ref(API_URL)
+
+const favoriteStore = useFavoritesStore()
+const {favorites, isFavoriteSelected}= storeToRefs(favoriteStore)
 
 const { search } = useFilters(() => {
   const _url = new URL(API_URL)
@@ -77,16 +71,19 @@ const { search } = useFilters(() => {
 
   url.value = _url.toString()
 
-  executeFetchCharacters()
+  if (!showFavorites.value) {
+    executeFetchCharacters()
+  }
 })
 
 const { execute: executeFetchCharacters, error, onFetchError }
   = useFetch(url, {
     immediate: false,
     afterFetch: (data) => {
-      characters.value = data.data.results
+      characters.value = data.data.results.map((ch: Character) => ({ ...ch, isFavorite: isFavoriteSelected.value(ch.id)  }))
       pagination.value = data.data.info
       search.isLoading = false
+
       return data
     },
     beforeFetch: () => {
@@ -101,30 +98,19 @@ onFetchError(() => {
   search.page = 1
 })
 
-function handleSelectCharacter(id: number) {
-  const { onFetchResponse } = useFetch(`${API_URL}/${id}`)
+function handleToogleFavorite(id: number) {
+  const characterIndex = characters.value.findIndex((character) => character.id === id)
 
-  onFetchResponse(response => {
-    response.json().then((character) => {
-      const { open, close } = useModal({
-        component: BaseModal,
-        attrs: {
-          noPadding: true,
-          scroll: true
-        },
-        slots: {
-          default: useModalSlot({
-            component: Details,
-            attrs: {
-              close: () => close(),
-              character
-            }
-          })
-        }
-      })
-      open()
-    })
-  })
+  if (characterIndex === -1) return
+
+  characters.value[characterIndex].isFavorite = !characters.value[characterIndex].isFavorite
+}
+
+function handleShowFavorites() {
+  showFavorites.value = !showFavorites.value
+  if (!showFavorites.value) {
+    executeFetchCharacters()
+  }
 }
 </script>
 
