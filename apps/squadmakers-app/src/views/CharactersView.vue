@@ -120,7 +120,6 @@ function handleShowFavorites() {
 <style lang="scss" scoped>
 .sm-characters-view {
   max-width: 1440px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -128,10 +127,10 @@ function handleShowFavorites() {
 
   &__content {
     padding-bottom: 64px;
+    min-height: 50vh;
     max-width: 1030px;
     margin: auto;
     width: 100%;
-    flex: 1 0 auto;
 
     &__top {
       margin: 32px 0;
