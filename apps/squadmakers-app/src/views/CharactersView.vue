@@ -27,6 +27,8 @@
         />
       </div>
     </div>
+
+    <Footer />
   </div>
 
   <ModalsContainer />
@@ -47,6 +49,7 @@ import { Favorite } from 'christiancazu-squadmakers-lib';
 import Pagination from '@/components/Pagination.vue';
 import Characters from '@/components/Characters.vue';
 import { useFavoritesStore } from '@/stores/favorites';
+import Footer from '@/components/Footer.vue';
 
 const characters = ref<Character[]>([])
 const pagination = ref<PaginationType>()
@@ -117,12 +120,18 @@ function handleShowFavorites() {
 <style lang="scss" scoped>
 .sm-characters-view {
   max-width: 1440px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   margin: auto;
-  padding-bottom: 64px;
 
   &__content {
+    padding-bottom: 64px;
     max-width: 1030px;
     margin: auto;
+    width: 100%;
+    flex: 1 0 auto;
 
     &__top {
       margin: 32px 0;

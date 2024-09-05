@@ -3,6 +3,7 @@
     <img
       class="sm-hero__bg"
       :src="imageBg"
+      alt="rickandmorty"
     >
     <div class="sm-hero__search">
       <img
